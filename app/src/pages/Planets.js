@@ -14,7 +14,7 @@ export default function People() {
   return (
     <>
       <div>
-        <img src={`https://starwars-visualguide.com/assets/img/planets/${getIdFromUrl(planetData.url)}.jpg`} width="200" />
+        <img src={`https://starwars-visualguide.com/assets/img/planets/${getIdFromUrl(planetData.url)}.jpg`} onError={(e) => {e.target.src='https://starwars-visualguide.com/assets/img/big-placeholder.jpg'}} width="200" />
         <b className='title'>{ planetData.name }</b>
         <div className='infoList'>
           <p>Population:</p>

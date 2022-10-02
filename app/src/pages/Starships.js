@@ -14,7 +14,7 @@ export default function People() {
   return (
     <>
       <div>
-        <img src={`https://starwars-visualguide.com/assets/img/starships/${getIdFromUrl(starshipData.url)}.jpg`} width="200" />
+        <img src={`https://starwars-visualguide.com/assets/img/starships/${getIdFromUrl(starshipData.url)}.jpg`} onError={(e) => {e.target.src='https://starwars-visualguide.com/assets/img/big-placeholder.jpg'}} width="200" />
         <b className='title'>{ starshipData.name }</b>
         <div className='infoList'>
           <p>Manufacturer:</p>
