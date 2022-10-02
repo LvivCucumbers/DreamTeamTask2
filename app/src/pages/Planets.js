@@ -1,13 +1,35 @@
 
-import { Link, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from "react";
+import { getPlanetData, getIdFromUrl } from "../services/sw-service";
 
+export default function People() {
+  const [planetData, setPlanetData]  = useState([])
 
-export default function Planets() {
-    return (
-        <ul>
-            <p>Page</p>
-        </ul>
-    );
+  useEffect(() => { getPlanetData(1).then(resp => setPlanetData(resp.data)); }, []);
+  
+  function handleClick() {
+    getPlanetData(getIdFromUrl(planetData.url)+1).then(resp => setPlanetData(resp.data));
+  }
+
+  return (
+    <>
+      <div>
+        <img src={`https://starwars-visualguide.com/assets/img/planets/${getIdFromUrl(planetData.url)}.jpg`} width="200" />
+        <b className='title'>{ planetData.name }</b>
+        <div className='infoList'>
+          <p>Population:</p>
+          <p>{ planetData.population }</p>
+        </div>
+        <div className='infoList'>
+          <p>Rotation period:</p>
+          <p>{ planetData.rotation_period }</p>
+        </div>
+        <div className='infoList'>
+          <p>Terrain:</p>
+          <p>{ planetData.terrain }</p>
+        </div>
+        <button onClick={handleClick}>Next</button>
+      </div>
+    </>
+  );
 }
-
